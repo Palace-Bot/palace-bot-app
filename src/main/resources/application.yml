@@ -3,3 +3,4 @@ bot:
     qq: 1515023757
     password:
     command-prefix: /
+    user:
