@@ -18,13 +18,13 @@ public class MainApplication {
         Bot bot = BotFactory.INSTANCE.newBot(QQ, PASSWORD, BotConfigurationBuilder.builder());
         bot.login();
 
-        EventDispatcher eventDispatcher = new EventDispatcher();
-        eventDispatcher.start();
-
         // 初始化命令管理器
         CommandManagerFactory.setCommandManager(new DefaultCommandManager(COMMAND_PREFIX, bot));
         // 启动命令推送
         CommandManagerFactory.instance().startCommandPush();
+
+        EventDispatcher eventDispatcher = new EventDispatcher();
+        eventDispatcher.start();
 
         // jvm关闭钩子函数
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
