@@ -24,9 +24,8 @@ class BotConfigurationBuilder private constructor() {
                     workingDir = File("./mirai")
                     // 缓存目录
                     cacheDir = File("cache")
-
-                    // TODO 默认设备信息
-                    fileBasedDeviceInfo("myDeviceInfo.json") // 存储为 "myDeviceInfo.json"
+                    // 默认设备信息
+                    fileBasedDeviceInfo("deviceInfo.json") // 存储为 "myDeviceInfo.json"
 
                     // 重定向日志 Bot / Net
                     redirectBotLogToFile()
