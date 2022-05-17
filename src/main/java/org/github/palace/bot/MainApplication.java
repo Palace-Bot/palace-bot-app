@@ -4,8 +4,10 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import org.github.palace.bot.builder.BotConfigurationBuilder;
 import org.github.palace.bot.core.EventDispatcher;
-import org.github.palace.bot.core.cli.support.CommandManagerFactory;
-import org.github.palace.bot.core.cli.support.DefaultCommandManager;
+import org.github.palace.bot.core.plugin.CommandManager;
+import org.github.palace.bot.core.plugin.DefaultPluginManager;
+import org.github.palace.bot.core.plugin.Loc;
+import org.github.palace.bot.core.plugin.PluginManager;
 
 import static org.github.palace.bot.constant.BaseConstant.*;
 
@@ -15,13 +17,18 @@ import static org.github.palace.bot.constant.BaseConstant.*;
  */
 public class MainApplication {
     public static void main(String[] args) {
+
         Bot bot = BotFactory.INSTANCE.newBot(QQ, PASSWORD, BotConfigurationBuilder.builder());
         bot.login();
 
-        // 初始化命令管理器
-        CommandManagerFactory.setCommandManager(new DefaultCommandManager(COMMAND_PREFIX, bot));
-        // 启动命令推送
-        CommandManagerFactory.instance().startCommandPush();
+        // 初始化管理器
+        CommandManager commandManager = new CommandManager(COMMAND_PREFIX, bot);
+        PluginManager pluginManager = new DefaultPluginManager("plugins", commandManager);
+        Loc.put(PluginManager.class, pluginManager);
+
+        pluginManager.load();
+        pluginManager.start();
+
 
         EventDispatcher eventDispatcher = new EventDispatcher();
         eventDispatcher.start();

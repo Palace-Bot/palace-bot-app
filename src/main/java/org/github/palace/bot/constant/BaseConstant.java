@@ -18,7 +18,6 @@ public final class BaseConstant {
         QQ = cast(YamlLoader.loadYamlNames("bot.base.qq", MainApplication.class.getClassLoader()), Long.class);
         PASSWORD = cast(YamlLoader.loadYamlNames("bot.base.password", MainApplication.class.getClassLoader()), String.class);
         COMMAND_PREFIX = cast(YamlLoader.loadYamlNames("bot.base.command-prefix", MainApplication.class.getClassLoader()), String.class);
-
     }
 
     private BaseConstant() {
