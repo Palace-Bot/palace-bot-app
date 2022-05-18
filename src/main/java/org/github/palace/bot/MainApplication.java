@@ -37,8 +37,8 @@ public class MainApplication {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             // 关闭事件
             eventDispatcher.stop();
-            // 关闭命令推送
-            CommandManagerFactory.instance().stopCommandPush();
+            // 关闭插件
+            pluginManager.stop();
         }));
     }
 
