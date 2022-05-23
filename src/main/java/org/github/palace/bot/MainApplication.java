@@ -22,9 +22,10 @@ public class MainApplication {
         bot.login();
 
         // 初始化管理器
-        CommandManager commandManager = new CommandManager(COMMAND_PREFIX, bot);
-        PluginManager pluginManager = new DefaultPluginManager("plugins", commandManager);
+        PluginManager pluginManager = new DefaultPluginManager("plugins");
+
         Loc.put(PluginManager.class, pluginManager);
+        Loc.put(Bot.class, bot);
 
         pluginManager.load();
         pluginManager.start();
