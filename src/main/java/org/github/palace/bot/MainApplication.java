@@ -5,7 +5,6 @@ import net.mamoe.mirai.BotFactory;
 import org.github.palace.bot.builder.BotConfigurationBuilder;
 import org.github.palace.bot.core.EventDispatcher;
 import org.github.palace.bot.core.plugin.DefaultPluginManager;
-import org.github.palace.bot.core.plugin.Loc;
 import org.github.palace.bot.core.plugin.PluginManager;
 import org.github.palace.bot.core.util.ResourceUtils;
 
@@ -19,18 +18,11 @@ public class MainApplication {
     public static void main(String[] args) {
 
         Bot bot = BotFactory.INSTANCE.newBot(QQ, PASSWORD, BotConfigurationBuilder.builder());
-        bot.login();
 
         // 初始化管理器
-        PluginManager pluginManager = new DefaultPluginManager(ResourceUtils.PLUGINS_URL);
+        PluginManager pluginManager = new DefaultPluginManager(bot, ResourceUtils.PLUGINS_URL);
 
-        Loc.put(PluginManager.class, pluginManager);
-        Loc.put(Bot.class, bot);
-
-        pluginManager.load();
-        pluginManager.start();
-
-        EventDispatcher eventDispatcher = new EventDispatcher();
+        EventDispatcher eventDispatcher = new EventDispatcher(pluginManager);
         eventDispatcher.start();
 
         // jvm关闭钩子函数

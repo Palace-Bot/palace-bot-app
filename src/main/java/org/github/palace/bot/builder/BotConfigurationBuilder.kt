@@ -19,7 +19,7 @@ class BotConfigurationBuilder private constructor() {
                     // 心跳策略
                     heartbeatStrategy = BotConfiguration.HeartbeatStrategy.REGISTER
                     // 登录协议
-                    protocol = BotConfiguration.MiraiProtocol.ANDROID_PHONE
+                    protocol = BotConfiguration.MiraiProtocol.ANDROID_PAD
                     // 运行目录
                     workingDir = File("./mirai")
                     // 缓存目录
